@@ -19,6 +19,14 @@ Dinner::Dinner(const unsigned minThinkingTime, const unsigned maxThinkingTime,
 	InitSages();
 }
 
+Dinner::~Dinner() noexcept
+{
+	for (int i = 0; i < philosopherCount; i++)
+	{
+		sages[i].GetThread()->join();
+	}
+}
+
 void Dinner::SetPhilosopherCount(const unsigned int count)
 {
 	philosopherCount = count;
@@ -45,7 +53,6 @@ void Dinner::InitSages()
 	for (int i = 0; i < philosopherCount; i++)
 	{
 		sages[i].InitThread();
-		sages[i].GetThread()->join();
 	}
 }
 

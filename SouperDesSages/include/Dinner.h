@@ -22,15 +22,17 @@ public:
 	Dinner(unsigned int minThinkingTime, unsigned int maxThinkingTime,
 		unsigned int minEatingTime, unsigned int maxEatingTime, unsigned int timeNeededToEat);
 
+	~Dinner() noexcept;
+
 	static void SetPhilosopherCount(unsigned int count);
 
 	void InitSages();
 
-	constexpr unsigned int GetMinThinkingTime() const;
-	constexpr unsigned int GetMaxThinkingTime() const;
-	constexpr unsigned int GetMinEatingTime() const;
-	constexpr unsigned int GetMaxEatingTime() const;
-	constexpr unsigned int GetTimeNeeded() const;
+	[[nodiscard]] constexpr unsigned int GetMinThinkingTime() const;
+	[[nodiscard]] constexpr unsigned int GetMaxThinkingTime() const;
+	[[nodiscard]] constexpr unsigned int GetMinEatingTime() const;
+	[[nodiscard]] constexpr unsigned int GetMaxEatingTime() const;
+	[[nodiscard]] constexpr unsigned int GetTimeNeeded() const;
 
 	void SetMinThinkingTime(const unsigned int newValue);
 	void SetMaxThinkingTime(const unsigned int newValue);
