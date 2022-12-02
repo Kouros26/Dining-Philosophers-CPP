@@ -1,39 +1,38 @@
 #pragma once
 #include "Chopstick.h"
 #include <thread>
-
 class Sage
 {
 	Chopstick* leftChopstick = nullptr;
 	Chopstick* rightChopstick = nullptr;
 
-	std::thread philosopher;
+	std::chrono::duration<double> elapsedSeconds{};
 
-	unsigned int minThinkingTime = 3;
-	unsigned int maxThinkingTime = 10;
+	std::thread* philosopher;
+	
+	unsigned int thinkingTime{};
+	unsigned int eatingTime{};
+	double timeNeededToEat{};
 
-	unsigned int minEatingTime = 1;
-	unsigned int maxEatingTime = 3;
-
-	inline static unsigned int philosopherCount{};
-	inline static constexpr unsigned int timeNeededToEat = 5;
+	bool finished = false;
+	bool eating = false;
 
 public:
 
-	Sage();
-	Sage(unsigned int minThinkingTime, unsigned int maxThinkingTime,
-		unsigned int minEatingTime, unsigned int maxEatingTime);
+	Sage(unsigned int thinkingTime, unsigned int eatingTime, double timeNeededToEat);
 
 	void Run();
+	void InitThread();
 
-	static void SetPhilosopherCount(unsigned int count);
+	Chopstick*& GetLeftChopstick();
+	std::thread*& GetThread();
 
-	Chopstick*& GetChopstick();
-	std::thread& GetThread();
+	void SetRightChopstick(Chopstick*& chopstick);
 
 private:
 
 	void Think();
-	//bool TryGetChopstick();
-	//void Eat();
+	void TryToEat();
+	static bool TryGetChopstick(Chopstick*& chopstick);
+	void Eat();
 };

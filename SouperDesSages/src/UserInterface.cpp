@@ -1,6 +1,6 @@
 #include "UserInterface.h"
 #include <iostream>
-#include "Sage.h"
+#include "Dinner.h"
 
 UserInterface::UserInterface()
 {
@@ -10,7 +10,7 @@ UserInterface::UserInterface()
 	if (count <= 0)
 		return;
 
-	Sage::SetPhilosopherCount(count);
+	Dinner::SetPhilosopherCount(count);
 
 	if (AskForValuesChanges() != 0)
 	{
@@ -18,7 +18,7 @@ UserInterface::UserInterface()
 		return;
 	}
 
-	InitSages();
+	InitDinner();
 }
 
 void UserInterface::AskForInput(const std::string& display, int& to)
@@ -58,23 +58,23 @@ int UserInterface::AskForValuesChanges()
 int UserInterface::ChangeValues()
 {
 	AskForInput("Minimum thinking time : ", minThinkingTime);
-
 	if (minThinkingTime <= 0)
 		return -1;
 
 	AskForInput("Maximum thinking time : ", maxThinkingTime);
-
 	if (maxThinkingTime <= 0 || maxThinkingTime < minThinkingTime)
 		return -1;
 
 	AskForInput("Minimum eating time : ", minEatingTime);
-
 	if (minEatingTime <= 0)
 		return -1;
 
 	AskForInput("Maximum eating time : ", maxEatingTime);
-
 	if (maxEatingTime <= 0 || maxEatingTime < minEatingTime)
+		return -1;
+
+	AskForInput("Time needed to finish eating : ", timeNeededToEat);
+	if (timeNeededToEat <= 0 || timeNeededToEat < maxEatingTime)
 		return -1;
 
 	valuesChanged = true;
@@ -82,26 +82,23 @@ int UserInterface::ChangeValues()
 	return 0;
 }
 
-void UserInterface::InitSages() const
+void UserInterface::InitDinner() const
 {
 	if (valuesChanged)
 	{
-		for (int i = 0; i < count; i++)
-		{
-			Sage sage{ static_cast<unsigned int>(minThinkingTime),
-					   static_cast<unsigned int>(maxThinkingTime),
-						 static_cast<unsigned int>(minEatingTime),
-						 static_cast<unsigned int>(maxEatingTime) };
-			std::cout << "Sage created" << std::endl;
-		}
+		Dinner dinner{ static_cast<unsigned int>(minThinkingTime),
+			           static_cast<unsigned int>(maxThinkingTime),
+			            static_cast<unsigned int>(minEatingTime),
+			            static_cast<unsigned int>(maxEatingTime),
+			           static_cast<unsigned int>(timeNeededToEat) };
+
+		std::cout << "Dinner created with custom values" << std::endl;
 	}
 
 	else
 	{
-		for (int i = 0; i < count; i++)
-		{
-			Sage sage{};
-			std::cout << "Sage created" << std::endl;
-		}
+		Dinner dinner{};
+
+		std::cout << "Dinner created with default values" << std::endl;
 	}
 }

@@ -8,6 +8,7 @@ class UserInterface
 	int maxThinkingTime{};
 	int minEatingTime{};
 	int maxEatingTime{};
+	int timeNeededToEat{};
 	inline static int count{};
 
 public:
@@ -17,8 +18,9 @@ public:
 private:
 
 	static void AskForInput(const std::string& display, int& to);
+
 	int AskForValuesChanges();
 	int ChangeValues();
 
-	void InitSages() const;
+	void InitDinner() const;
 };

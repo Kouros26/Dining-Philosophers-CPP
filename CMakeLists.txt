@@ -4,7 +4,7 @@ set(PROJECT_NAME "SouperDesSages")
 
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 file(GLOB_RECURSE SOURCE_FILE "${PROJECT_SOURCE_DIR}/SouperDesSages/src/*.cpp")
 file(GLOB_RECURSE INCLUDE_FILE "${PROJECT_SOURCE_DIR}/SouperDesSages/include/*.h")
