@@ -14,6 +14,7 @@ class UserInterface
 public:
 
 	UserInterface();
+	void InitDinner() const;
 
 private:
 
@@ -22,5 +23,4 @@ private:
 	int AskForValuesChanges();
 	int ChangeValues();
 
-	void InitDinner() const;
 };

@@ -1,10 +1,11 @@
 #include "main.h"
 #include "UserInterface.h"
-#include <thread>
 
 int main()
 {
-	UserInterface interface;
+	const UserInterface interface;
+
+	interface.InitDinner();
 
 	return 0;
 }

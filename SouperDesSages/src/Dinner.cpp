@@ -1,5 +1,4 @@
 #include "Dinner.h"
-
 #include <iostream>
 
 Dinner::Dinner()
@@ -38,7 +37,9 @@ void Dinner::InitSages()
 	{
 		srand(i);
 
-		Sage sage(rand() % maxThinkingTime + minThinkingTime, rand() % maxEatingTime + minEatingTime, timeNeededToEat);
+		Sage sage(rand() % (maxThinkingTime - minThinkingTime) + minThinkingTime, 
+		          rand() % (maxEatingTime - minEatingTime) + minEatingTime, 
+		          timeNeededToEat, i + 1);
 
 		sages.push_back(sage);
 

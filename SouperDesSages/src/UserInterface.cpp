@@ -7,8 +7,11 @@ UserInterface::UserInterface()
 	std::cout << "PhilosopherCount : ";
 	std::cin >> count;
 
-	if (count <= 0)
+	if (count <= 0 || count > 20)
+	{
+		std::cout << "Invalid number. Maximum is 20" << std::endl;
 		return;
+	}
 
 	Dinner::SetPhilosopherCount(count);
 
@@ -17,8 +20,6 @@ UserInterface::UserInterface()
 		std::cout << "Error while changing values" << std::endl;
 		return;
 	}
-
-	InitDinner();
 }
 
 void UserInterface::AskForInput(const std::string& display, int& to)

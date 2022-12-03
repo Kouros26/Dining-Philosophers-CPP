@@ -1,15 +1,16 @@
 #pragma once
 #include "Chopstick.h"
 #include <thread>
+
 class Sage
 {
 	Chopstick* leftChopstick = nullptr;
 	Chopstick* rightChopstick = nullptr;
 
-	std::chrono::duration<double> elapsedSeconds{};
+	std::thread* philosopher{};
 
-	std::thread* philosopher;
-	
+	unsigned int registrationNumber{};
+
 	unsigned int thinkingTime{};
 	unsigned int eatingTime{};
 	double timeNeededToEat{};
@@ -19,7 +20,8 @@ class Sage
 
 public:
 
-	Sage(unsigned int thinkingTime, unsigned int eatingTime, double timeNeededToEat);
+	Sage(unsigned int thinkingTime, unsigned int eatingTime, double timeNeededToEat, unsigned int matriculeNumber);
+	~Sage();
 
 	void Run();
 	void InitThread();
@@ -31,8 +33,8 @@ public:
 
 private:
 
-	void Think();
-	void TryToEat();
+	void Think() const;
+	bool TryToEat();
 	static bool TryGetChopstick(Chopstick*& chopstick);
 	void Eat();
 };
